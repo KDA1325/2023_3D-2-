@@ -97,8 +97,8 @@ public class MovementCharacterController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        Debug.Log($"{hit.gameObject.name} 오브젝트와 충돌");
-    }
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    Debug.Log($"{hit.gameObject.name} 오브젝트와 충돌");
+    //}
 }
