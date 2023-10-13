@@ -6,6 +6,9 @@ using UnityEngine;
 public class MovementCharacterController : MonoBehaviour
 {
     [SerializeField]
+    private PlayerStamina playerStamina;
+
+    [SerializeField]
     private float walkSpeed = 2.0f; // 걷기 속도
     [SerializeField]
     private float runSpeed = 5.0f; // 뛰기 속도
@@ -16,11 +19,14 @@ public class MovementCharacterController : MonoBehaviour
     [SerializeField]
     private float jumpForce = 3.0f; // 뛰어오르는 힘
     private Vector3 moveDirection = Vector3.zero; // 이동 방향
-    private Animator animator;
 
     [SerializeField]
     private Transform mainCamera;
     private CharacterController characterController;
+    private Animator animator;
+
+    // 다른 클래스에서 이동속도 변수 값을 확인할 수 있도록 Get Property 정의
+    public float MoveSpeed => moveSpeed;
 
     private void Awake()
     {
@@ -45,14 +51,24 @@ public class MovementCharacterController : MonoBehaviour
         //    animator.SetFloat("moveSpeed", 0);
         //}
 
+        // 오브젝트의 이동 속도 설정(shift키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
+        moveSpeed = Mathf.Lerp(walkSpeed, runSpeed, Input.GetAxis("Sprint"));
+
         // Shift 키를 누르지 않으면 0.5, 누르면 1
         float offset = 0.5f + Input.GetAxis("Sprint") * 0.5f;
+
+        // 스태미나 긴급 복구 모드일 때는 달리기 불가능
+        if(playerStamina.IsEmergencyMode == true)
+        {
+            moveSpeed = walkSpeed;
+            offset = 0.5f;
+        }
 
         animator.SetFloat("horizontal", x * offset);
         animator.SetFloat("vertical", z * offset);
 
         // 오브젝트의 이동 속도 설정(Shift 키를 누르지 않으면 walkSpeed, 누르면 runSpeed)
-        moveSpeed = Mathf.Lerp(walkSpeed, runSpeed, Input.GetAxis("Sprint"));
+        //moveSpeed = Mathf.Lerp(walkSpeed, runSpeed, Input.GetAxis("Sprint"));
 
         // 오브젝트의 이동 방향 설정
         // moveDirection = new Vector3(x, moveDirection.y, z);
