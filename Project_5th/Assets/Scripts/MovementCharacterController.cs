@@ -36,6 +36,25 @@ public class MovementCharacterController : MonoBehaviour
 
     private void Update()
     {
+        // x, z축 이동
+        Movement();
+
+        // y축 이동(중력, 점프)
+        GravityAndJump();
+
+        // 공격
+        Attack();
+
+        // CharacterController에 정의되엉 있는 Move() 메소드를 이용해 이동
+        // 매개변수에 프레임 당 이동 거리 정보 적용 (이동 방향 * 이동 속도 * Time.deltaTime)
+        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+
+        // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
+        transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
+    }
+
+    private void Movement()
+    {
         // 키 입력으로 x, z축 이동 방향 설정
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
@@ -58,7 +77,7 @@ public class MovementCharacterController : MonoBehaviour
         float offset = 0.5f + Input.GetAxis("Sprint") * 0.5f;
 
         // 스태미나 긴급 복구 모드일 때는 달리기 불가능
-        if(playerStamina.IsEmergencyMode == true)
+        if (playerStamina.IsEmergencyMode == true)
         {
             moveSpeed = walkSpeed;
             offset = 0.5f;
@@ -74,27 +93,31 @@ public class MovementCharacterController : MonoBehaviour
         // moveDirection = new Vector3(x, moveDirection.y, z);
         Vector3 dir = mainCamera.rotation * new Vector3(x, 0, z);
         moveDirection = new Vector3(dir.x, moveDirection.y, dir.z);
+    }
 
+    private void GravityAndJump()
+    {
         // Space 키를 눌렀을 때 플레이어가 바닥에 있으면 점프
-        if(Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded == true)
+        if (Input.GetKeyDown(KeyCode.Space) && characterController.isGrounded == true)
         {
             animator.SetTrigger("onJump");
             moveDirection.y = jumpForce;
         }
-        
+
         // 플레이어가 땅을 밟고 있지 않으면
         // y축 이동방향에 gravity * Time.deltaTime을 더해줌
-        if(characterController.isGrounded == false)
+        if (characterController.isGrounded == false)
         {
             moveDirection.y += gravity * Time.deltaTime;
         }
+    }
 
-        // CharacterController에 정의되엉 있는 Move() 메소드를 이용해 이동
-        // 매개변수에 프레임 당 이동 거리 정보 적용 (이동 방향 * 이동 속도 * Time.deltaTime)
-        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
-
-        // 현재 카메라가 바라보고 있는 전방 방향을 보도록 설정
-        transform.rotation = Quaternion.Euler(0, mainCamera.eulerAngles.y, 0);
+    private void Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("onAttack");
+        }
     }
 
     //private void OnControllerColliderHit(ControllerColliderHit hit)
