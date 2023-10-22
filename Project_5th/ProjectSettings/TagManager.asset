@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Interactable
   - Hitable
+  - Eatable
   layers:
   - Default
   - TransparentFX

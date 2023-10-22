@@ -6,6 +6,8 @@ using UnityEngine;
 public class MovementCharacterController : MonoBehaviour
 {
     [SerializeField]
+    private UIInventory uiInventory;
+    [SerializeField]
     private PlayerStamina playerStamina;
 
     [SerializeField]
@@ -120,6 +122,18 @@ public class MovementCharacterController : MonoBehaviour
         }
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.CompareTag("Eatable"))
+        {
+            int index = hit.gameObject.GetComponent<EatableObject>().ItemIndex;
+            uiInventory.GetItem(index);
+
+            Destroy(hit.gameObject);
+
+            Debug.Log(hit.gameObject.name);
+        }
+    }
     //private void OnControllerColliderHit(ControllerColliderHit hit)
     //{
     //    Debug.Log($"{hit.gameObject.name} 오브젝트와 충돌");

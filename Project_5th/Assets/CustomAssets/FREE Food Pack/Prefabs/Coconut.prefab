@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 23000011704802928}
   - component: {fileID: 1799917512850322196}
   - component: {fileID: -6267936508166678470}
+  - component: {fileID: -8138420922227325764}
   m_Layer: 0
   m_Name: Coconut
-  m_TagString: Untagged
+  m_TagString: Eatable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.054280087
   m_Center: {x: 0, y: -0.000000024214387, z: -0.000000039115548}
+--- !u!114 &-8138420922227325764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011038145264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af0b2ac1d12b3342a5b78ae21d66002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIndex: 3

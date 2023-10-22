@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 23000012911803522}
   - component: {fileID: 5056109968384364531}
   - component: {fileID: -2359431715332438611}
+  - component: {fileID: -7164199151422752574}
   m_Layer: 0
   m_Name: Banana
-  m_TagString: Untagged
+  m_TagString: Eatable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,16 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.07280632
   m_Center: {x: 0, y: -0.0000000018626451, z: 0}
+--- !u!114 &-7164199151422752574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000012997751318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af0b2ac1d12b3342a5b78ae21d66002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemIndex: 1
