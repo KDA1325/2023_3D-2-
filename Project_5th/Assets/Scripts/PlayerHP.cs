@@ -11,7 +11,11 @@ public class PlayerHP : MonoBehaviour
 
     // 외부에서 체력 정보를 열람할 수 있도록 Get Property 정의
     public float Max => max;
-    public float Current => current;
+    public float Current
+    {
+        set => current = Mathf.Clamp(value, 0, max);
+        get => current;
+    }
     // => 연산자, 식 본문 정의, 멤버 구현에서 멤버 이름을 구분할 때 사용
     // member => expression;
     // expression은 유효한 식

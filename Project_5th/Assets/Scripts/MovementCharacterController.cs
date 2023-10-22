@@ -116,6 +116,8 @@ public class MovementCharacterController : MonoBehaviour
 
     private void Attack()
     {
+        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject()) return;
+
         if (Input.GetMouseButtonDown(0))
         {
             animator.SetTrigger("onAttack");
